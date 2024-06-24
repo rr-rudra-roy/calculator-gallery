@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { SEO } from "@/data/seo"
+import ThemeProvider from "@/context/ThemeContext"
 import "@/styles/globals.css"
 import "@/styles/tailwind.css"
 
@@ -38,7 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <ThemeProvider>
+        <body>{children}</body>
+      </ThemeProvider>
     </html>
   )
 }

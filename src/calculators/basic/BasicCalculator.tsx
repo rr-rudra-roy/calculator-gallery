@@ -2,6 +2,7 @@
 import { useEffect, useReducer, useCallback } from "react"
 import Header from "@/layouts/Header"
 import Footer from "@/layouts/Footer"
+import { useTheme } from "@/context/ThemeContext"
 import {
   INITIAL_STATE,
   ActionType,
@@ -22,6 +23,7 @@ import {
 } from "./components/CalculatorButtons"
 
 export default function BasicCalculator() {
+  const { theme, toggleTheme } = useTheme()
   const [{ previousOperand, currentOperand, operation }, dispatch] = useReducer(
     reducer,
     INITIAL_STATE
@@ -63,53 +65,55 @@ export default function BasicCalculator() {
 
   return (
     <>
-      <main className="w-full h-full">
-        <div>
-          <Header />
-        </div>
-        <section className="w-full h-full mt-12 sm:mt-20 md:mt-28 lg:mt-36">
-          <div className="w-full md:max-w-[600px] mx-auto px-4">
-            <div className="h-full w-full my-8 bg-slate-100 shadow-md">
-              <div className="w-full h-full flex flex-col bg-slate-200">
-                <div className="h-12 md:h-16 px-4 flex justify-end items-center text-base md:text-lg lg:text-xl font-semibold text-gray-700">
-                  {previousOperand} {operation}
+      <main className={`w-full h-full ${theme}`}>
+        <section className="w-full h-full bg-white dark:bg-darkJungleGreen">
+          <div>
+            <Header />
+          </div>
+          <section className="w-full h-full mt-12 sm:mt-20 md:mt-28 lg:mt-36">
+            <div className="w-full md:max-w-[600px] mx-auto px-4">
+              <div className="h-full w-full my-8 bg-slate-100 dark:bg-slate-900 shadow-md dark:shadow-slate-700">
+                <div className="w-full h-full flex flex-col bg-slate-200 dark:bg-slate-800">
+                  <div className="h-12 md:h-16 px-4 flex justify-end items-center text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300">
+                    {previousOperand} {operation}
+                  </div>
+                  <div className="h-12 md:h-16 px-4 flex justify-end items-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
+                    {currentOperand}
+                  </div>
                 </div>
-                <div className="h-12 md:h-16 px-4 flex justify-end items-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-900">
-                  {currentOperand}
+                <div className="w-full h-full grid grid-cols-4 gap-0.5">
+                  <ACButton dispatch={dispatch} />
+                  <BackSpaceButton dispatch={dispatch} theme={theme} />
+                  <ModulusOperationButton dispatch={dispatch} />
+                  <DivisonOperationButton dispatch={dispatch} theme={theme} />
+
+                  <DigitButton digit="7" dispatch={dispatch} />
+                  <DigitButton digit="8" dispatch={dispatch} />
+                  <DigitButton digit="9" dispatch={dispatch} />
+                  <MultiplicationOperationButton dispatch={dispatch} />
+
+                  <DigitButton digit="4" dispatch={dispatch} />
+                  <DigitButton digit="5" dispatch={dispatch} />
+                  <DigitButton digit="6" dispatch={dispatch} />
+                  <SubtractionOperationButton dispatch={dispatch} />
+
+                  <DigitButton digit="1" dispatch={dispatch} />
+                  <DigitButton digit="2" dispatch={dispatch} />
+                  <DigitButton digit="3" dispatch={dispatch} />
+                  <AdditionOperationButton dispatch={dispatch} />
+
+                  <PlusMinusButton dispatch={dispatch} theme={theme} />
+                  <DigitButton digit="0" dispatch={dispatch} />
+                  <PeriodButton dispatch={dispatch} />
+                  <EqualButton dispatch={dispatch} />
                 </div>
-              </div>
-              <div className="w-full h-full grid grid-cols-4 gap-0.5">
-                <ACButton dispatch={dispatch} />
-                <BackSpaceButton dispatch={dispatch} />
-                <ModulusOperationButton dispatch={dispatch} />
-                <DivisonOperationButton dispatch={dispatch} />
-
-                <DigitButton digit="7" dispatch={dispatch} />
-                <DigitButton digit="8" dispatch={dispatch} />
-                <DigitButton digit="9" dispatch={dispatch} />
-                <MultiplicationOperationButton dispatch={dispatch} />
-
-                <DigitButton digit="4" dispatch={dispatch} />
-                <DigitButton digit="5" dispatch={dispatch} />
-                <DigitButton digit="6" dispatch={dispatch} />
-                <SubtractionOperationButton dispatch={dispatch} />
-
-                <DigitButton digit="1" dispatch={dispatch} />
-                <DigitButton digit="2" dispatch={dispatch} />
-                <DigitButton digit="3" dispatch={dispatch} />
-                <AdditionOperationButton dispatch={dispatch} />
-
-                <PlusMinusButton dispatch={dispatch} />
-                <DigitButton digit="0" dispatch={dispatch} />
-                <PeriodButton dispatch={dispatch} />
-                <EqualButton dispatch={dispatch} />
               </div>
             </div>
+          </section>
+          <div>
+            <Footer />
           </div>
         </section>
-        <div>
-          <Footer />
-        </div>
       </main>
     </>
   )

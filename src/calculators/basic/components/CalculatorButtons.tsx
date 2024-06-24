@@ -13,13 +13,13 @@ export function DigitButton({
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: digit } })
         }
       >
         <span
-          className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900`}
+          className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
         >
           {digit}
         </span>
@@ -33,7 +33,7 @@ export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     <>
       <button
         type="button"
-        className="py-4 lg:py-7 bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-7 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.CLEAR })}
       >
         <span className="sr-only">Clear</span>
@@ -47,12 +47,12 @@ export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function BackSpaceButton({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function BackSpaceButton({ dispatch, theme }: { dispatch: Dispatch<Action>, theme: "light" | "dark" }) {
   return (
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 flex justify-center items-center bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.DELETE_DIGIT })}
       >
         <span className="sr-only">Backspace</span>
@@ -60,7 +60,7 @@ export function BackSpaceButton({ dispatch }: { dispatch: Dispatch<Action> }) {
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
           viewBox="0 -960 960 960"
-          className="h-6 w-6 aspect-auto fill-gray-900"
+          className="h-6 w-6 aspect-auto fill-gray-900 dark:fill-gray-100"
         >
           <path d="M360-200q-20 0-37.5-9T294-234L120-480l174-246q11-16 28.5-25t37.5-9h400q33 0 56.5 23.5T840-680v400q0 33-23.5 56.5T760-200H360Zm400-80v-400 400Zm-400 0h400v-400H360L218-480l142 200Zm96-40 104-104 104 104 56-56-104-104 104-104-56-56-104 104-104-104-56 56 104 104-104 104 56 56Z" />
         </svg>
@@ -78,7 +78,7 @@ export function AdditionOperationButton({
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
             type: ActionType.CHOOSE_OPERATION,
@@ -88,7 +88,7 @@ export function AdditionOperationButton({
       >
         <span className="sr-only">Addition</span>
         <span
-          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900`}
+          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900 dark:text-gray-100`}
         >
           +
         </span>
@@ -106,7 +106,7 @@ export function SubtractionOperationButton({
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
             type: ActionType.CHOOSE_OPERATION,
@@ -116,7 +116,7 @@ export function SubtractionOperationButton({
       >
         <span className="sr-only">Subtraction</span>
         <span
-          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900`}
+          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900 dark:text-gray-100`}
         >
           -
         </span>
@@ -134,7 +134,7 @@ export function MultiplicationOperationButton({
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 flex justify-center items-center bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
             type: ActionType.CHOOSE_OPERATION,
@@ -144,7 +144,7 @@ export function MultiplicationOperationButton({
       >
         <span className="sr-only">Multiplication</span>
         <svg
-          className="h-4 w-4 aspect-auto fill-gray-800"
+          className="h-4 w-4 aspect-auto fill-gray-800 dark:fill-gray-100"
           viewBox="-3.5 0 19 19"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -157,14 +157,16 @@ export function MultiplicationOperationButton({
 
 export function DivisonOperationButton({
   dispatch,
+  theme,
 }: {
   dispatch: Dispatch<Action>
+  theme: "light" | "dark"
 }) {
   return (
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 flex justify-center items-center bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
             type: ActionType.CHOOSE_OPERATION,
@@ -177,9 +179,12 @@ export function DivisonOperationButton({
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 aspect-auto fill-gray-900"
+          className="h-6 w-6 aspect-auto fill-gray-900 dark:fill-white"
         >
-          <path d="M6.34277 12L17.6565 12" stroke="#000000" />
+          <path
+            d="M6.34277 12L17.6565 12"
+            stroke={theme === "light" ? "#000000" : "#FFFFFF"}
+          />
           <circle
             cx="12"
             cy="16.9498"
@@ -207,7 +212,7 @@ export function ModulusOperationButton({
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
             type: ActionType.CHOOSE_OPERATION,
@@ -217,7 +222,7 @@ export function ModulusOperationButton({
       >
         <span className="sr-only">Modulus</span>
         <span
-          className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900`}
+          className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
         >
           %
         </span>
@@ -226,21 +231,30 @@ export function ModulusOperationButton({
   )
 }
 
-export function PlusMinusButton({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function PlusMinusButton({
+  dispatch,
+  theme,
+}: {
+  dispatch: Dispatch<Action>
+  theme: "light" | "dark"
+}) {
   return (
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 flex justify-center items-center bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.PLUS_MINUS })}
       >
         <span className="sr-only">Plus Minus</span>
         <svg
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 aspect-auto fill-gray-900"
+          className="h-6 w-6 aspect-auto fill-gray-900 dark:fill-gray-100"
         >
-          <path d="M12 4V14M7 9H17M7 20H17" stroke="#000000" />
+          <path
+            d="M12 4V14M7 9H17M7 20H17"
+            stroke={theme === "light" ? "#000000" : "#FFFFFF"}
+          />
         </svg>
       </button>
     </>
@@ -252,14 +266,14 @@ export function PeriodButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     <>
       <button
         type="button"
-        className="py-4 lg:py-6 flex justify-center items-center bg-white hover:bg-gray-100 transition-all duration-200"
+        className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: "." } })
         }
       >
         <span className="sr-only">Period</span>
         <span
-          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900`}
+          className={`${spaceGrotesk.className} text-lg md:text-xl lg:text-2xl text-gray-900 dark:text-gray-100`}
         >
           .
         </span>
