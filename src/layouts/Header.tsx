@@ -1,5 +1,6 @@
 "use client"
 import Image from "next/image"
+import { SOCIAL } from "@/data/social"
 
 export default function Header() {
   return (
@@ -22,13 +23,13 @@ export default function Header() {
         </div>
         <div className="h-max w-max">
           <a
-            href="https://github.com/rr-rudra-roy"
+            href={`${SOCIAL.buyMeACoffee}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <Image
-              src={"/logo/github-mark.svg"}
-              alt="Github Logo"
+              src={"/logo/bmc-logo.svg"}
+              alt="Buy Me coffee Logo"
               height={100}
               width={100}
               quality={100}
