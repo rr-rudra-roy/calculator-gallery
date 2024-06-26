@@ -47,7 +47,13 @@ export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function BackSpaceButton({ dispatch, theme }: { dispatch: Dispatch<Action>, theme: "light" | "dark" }) {
+export function BackSpaceButton({
+  dispatch,
+  theme,
+}: {
+  dispatch: Dispatch<Action>
+  theme: "light" | "dark"
+}) {
   return (
     <>
       <button
