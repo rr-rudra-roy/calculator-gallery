@@ -1,5 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, useEffect } from "react"
+import { useMediaQuery } from "@/hooks/useMediaQuery"
 
 type Theme = "light" | "dark"
 
@@ -26,16 +27,28 @@ export default function ThemeProvider({
   children: React.ReactNode
 }) {
   const [theme, setTheme] = useState<Theme>("light") // Default theme
+  const preferredTheme = useMediaQuery("(prefers-color-scheme: dark)")
+    ? "dark"
+    : "light"
 
   useEffect(() => {
-    // Check user's preferred color scheme
-    const preferredTheme = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches
-      ? "dark"
-      : "light"
+    // Check local storage for saved theme preference
+    const storedTheme = localStorage.getItem("theme")
 
-    setTheme(preferredTheme as Theme)
-  }, [])
+    if (storedTheme) {
+      setTheme(storedTheme as Theme)
+    } else {
+      // If theme is not saved in local storage.
+      // Check user's preferred color scheme
+      setTheme(preferredTheme as Theme)
+      localStorage.setItem("theme", preferredTheme)
+    }
+  }, [preferredTheme])
+
+  useEffect(()=>{
+    // change local storage theme value if theme changed
+    localStorage.setItem("theme", theme)
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"))
