@@ -8,17 +8,18 @@ import {
   ActionType,
   reducer,
 } from "./reducer/BasicCalculatorReducer"
+import { DigitButton, PeriodButton } from "./components/DigitButtons"
 import {
-  DigitButton,
-  ACButton,
-  BackSpaceButton,
   AdditionOperationButton,
   SubtractionOperationButton,
   MultiplicationOperationButton,
   DivisonOperationButton,
   ModulusOperationButton,
-  PeriodButton,
   PlusMinusButton,
+} from "./components/OperatorButtons"
+import {
+  ACButton,
+  BackSpaceButton,
   EqualButton,
 } from "./components/CalculatorButtons"
 
