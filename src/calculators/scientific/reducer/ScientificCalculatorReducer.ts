@@ -40,6 +40,7 @@ export enum ActionType {
   ADD_MEMORY = "ADD_MEMORY",
   SUBTRACT_MEMORY = "SUBTRACT_MEMORY",
   RECALL_MEMORY = "RECALL_MEMORY",
+  CLEAR_MEMORY = "CLEAR_MEMORY",
   CLEAR = "CLEAR",
   BACKSPACE = "BACKSPACE",
   EVALUATE = "EVALUATE",
@@ -149,6 +150,10 @@ interface MemoryRecall {
   type: ActionType.RECALL_MEMORY
 }
 
+interface MemoryClear {
+  type: ActionType.CLEAR_MEMORY
+}
+
 interface ClearAction {
   type: ActionType.CLEAR
 }
@@ -188,6 +193,7 @@ export type Action =
   | MemoryAdd
   | MemorySubtract
   | MemoryRecall
+  | MemoryClear
   | ClearAction
   | BackspaceAction
   | EvaluateAction
@@ -468,6 +474,35 @@ export function reducer(state: StateType, action: Action): StateType {
       } else if (action.payload.value === "rad") {
         return { ...state, degOrRad: "rad" }
       }
+
+    case ActionType.ADD_MEMORY:
+      return { ...state, memory: state.currentOperand }
+
+    case ActionType.SUBTRACT_MEMORY:
+      if (state.currentOperand === "") {
+        return state
+      }
+
+      if (state.memory === "") {
+        return {
+          ...state,
+          memory: `${math.multiply(-1, parseFloat(state.currentOperand))}`,
+        }
+      }
+
+      return {
+        ...state,
+        memory: `${math.subtract(
+          parseFloat(state.memory),
+          parseFloat(state.currentOperand)
+        )}`,
+      }
+
+    case ActionType.RECALL_MEMORY:
+      return { ...state, previousOperand: state.memory }
+
+    case ActionType.CLEAR_MEMORY:
+      return { ...state, memory: "" }
 
     case ActionType.CLEAR:
       return INITIAL_STATE

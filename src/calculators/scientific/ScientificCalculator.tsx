@@ -109,9 +109,9 @@ export default function ScientificCalculator() {
                 <div className="w-full h-full grid grid-cols-5 gap-0.5">
                   <ACButton dispatch={dispatch} />
                   <BackSpaceButton dispatch={dispatch} />
-                  <MemoryPlus />
-                  <MemoryMinus />
-                  <MemoryRemember />
+                  <MemoryPlus dispatch={dispatch} />
+                  <MemoryMinus dispatch={dispatch} />
+                  <MemoryRemember dispatch={dispatch} />
 
                   <DegreeRadianToggle degOrRad={degOrRad} dispatch={dispatch} />
                   <SinButton dispatch={dispatch} />
