@@ -1,5 +1,5 @@
 import { create, all } from "mathjs"
-import { convertDegreeToRadians, convertRadiansToDegree } from "../utils/funcs"
+import { convertDegreeToRadians, convertRadiansToDegree } from "@/utils/funcs"
 
 // Create a mathjs instance
 const math = create(all, {})
