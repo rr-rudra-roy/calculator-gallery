@@ -12,6 +12,7 @@ export default function Header() {
         <div className="h-max w-max">
           <a
             href="/"
+            aria-label="redirect to home page"
             className="group inline-block p-1.5 md:p-2.5 rounded-full bg-transparent border-2 border-gray-800 hover:bg-gray-800 dark:border-gray-200 dark:hover:bg-gray-200 transition-all duration-300"
           >
             <svg
@@ -25,7 +26,7 @@ export default function Header() {
           </a>
         </div>
         <div className="h-max w-max flex gap-4 lg:gap-8">
-          <button type="button" onClick={toggleTheme}>
+          <button type="button" aria-label="toogle-theme" onClick={toggleTheme}>
             <span className="sr-only">Toogle theme</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"

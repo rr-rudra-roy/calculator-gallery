@@ -10,6 +10,7 @@ export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     <>
       <button
         type="button"
+        id="clear-button"
         className="py-4 lg:py-7 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.CLEAR })}
       >
@@ -35,6 +36,7 @@ export function BackSpaceButton({
     <>
       <button
         type="button"
+        id="backspace-button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.DELETE_DIGIT })}
       >
@@ -57,6 +59,7 @@ export function EqualButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     <>
       <button
         type="button"
+        id="evaluate-button"
         className="py-4 lg:py-6 flex justify-center items-center bg-oceanBlue hover:bg-cosmicCobalt transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.CALCULATE })}
       >

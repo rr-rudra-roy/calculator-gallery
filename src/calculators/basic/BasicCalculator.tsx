@@ -25,10 +25,8 @@ import {
 
 export default function BasicCalculator() {
   const { theme, toggleTheme } = useTheme()
-  const [{ previousOperand, currentOperand, operationSymbol}, dispatch] = useReducer(
-    reducer,
-    INITIAL_STATE
-  )
+  const [{ previousOperand, currentOperand, operationSymbol }, dispatch] =
+    useReducer(reducer, INITIAL_STATE)
 
   // Handle key press events
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
@@ -75,10 +73,16 @@ export default function BasicCalculator() {
             <div className="w-full md:max-w-[600px] mx-auto px-4">
               <div className="h-full w-full my-8 bg-slate-100 dark:bg-slate-900 shadow-md dark:shadow-slate-700">
                 <div className="w-full h-full flex flex-col bg-slate-200 dark:bg-slate-800">
-                  <div className="h-12 md:h-16 px-4 flex justify-end items-center text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300">
+                  <div
+                    id="previousOperand"
+                    className="h-12 md:h-16 px-4 flex justify-end items-center text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300"
+                  >
                     {previousOperand} {operationSymbol}
                   </div>
-                  <div className="h-12 md:h-16 px-4 flex justify-end items-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
+                  <div
+                    id="currentOperand"
+                    className="h-12 md:h-16 px-4 flex justify-end items-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                  >
                     {currentOperand}
                   </div>
                 </div>

@@ -14,6 +14,7 @@ export function AdditionOperationButton({
     <>
       <button
         type="button"
+        id="addition-operator-button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
@@ -42,6 +43,7 @@ export function SubtractionOperationButton({
     <>
       <button
         type="button"
+        id="subtraction-operator-button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
@@ -70,6 +72,7 @@ export function MultiplicationOperationButton({
     <>
       <button
         type="button"
+        id="multiplication-operator-button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
@@ -102,6 +105,7 @@ export function DivisonOperationButton({
     <>
       <button
         type="button"
+        id="divison-operator-button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
@@ -148,6 +152,7 @@ export function ModulusOperationButton({
     <>
       <button
         type="button"
+        id="modulus-operator-button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({
@@ -178,6 +183,7 @@ export function PlusMinusButton({
     <>
       <button
         type="button"
+        id="plus-minus-button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() => dispatch({ type: ActionType.PLUS_MINUS })}
       >
