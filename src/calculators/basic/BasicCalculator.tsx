@@ -25,7 +25,7 @@ import {
 
 export default function BasicCalculator() {
   const { theme, toggleTheme } = useTheme()
-  const [{ previousOperand, currentOperand, operation }, dispatch] = useReducer(
+  const [{ previousOperand, currentOperand, operationSymbol}, dispatch] = useReducer(
     reducer,
     INITIAL_STATE
   )
@@ -35,7 +35,7 @@ export default function BasicCalculator() {
     if (event.repeat) return // Prevent multiple triggers on long key press
 
     const digitKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    const operationKeys = ["+", "-", "*", "/"]
+    const operationKeys = ["+", "-", "*", "/", "%"]
 
     if (digitKeys.includes(event.key)) {
       dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: event.key } })
@@ -76,7 +76,7 @@ export default function BasicCalculator() {
               <div className="h-full w-full my-8 bg-slate-100 dark:bg-slate-900 shadow-md dark:shadow-slate-700">
                 <div className="w-full h-full flex flex-col bg-slate-200 dark:bg-slate-800">
                   <div className="h-12 md:h-16 px-4 flex justify-end items-center text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300">
-                    {previousOperand} {operation}
+                    {previousOperand} {operationSymbol}
                   </div>
                   <div className="h-12 md:h-16 px-4 flex justify-end items-center text-lg md:text-xl lg:text-2xl font-semibold text-gray-900 dark:text-gray-100">
                     {currentOperand}

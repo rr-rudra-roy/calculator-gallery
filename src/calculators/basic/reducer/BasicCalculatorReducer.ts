@@ -8,6 +8,7 @@ export interface StateType {
   currentOperand: string
   previousOperand: string
   operation: string | null
+  operationSymbol: string
 }
 
 // Define action type
@@ -61,6 +62,7 @@ export const INITIAL_STATE: StateType = {
   currentOperand: "0",
   previousOperand: "",
   operation: null,
+  operationSymbol: "",
 }
 
 // Reducer function using mathjs for calculations
@@ -72,7 +74,10 @@ export function reducer(state: StateType, action: Action): StateType {
       if (action.payload.digit === "." && state.currentOperand.includes("."))
         return state
       if (action.payload.digit !== "0" && state.currentOperand === "0")
-        return { ...state, currentOperand: `${action.payload.digit}` }
+        return {
+          ...state,
+          currentOperand: `${action.payload.digit}`,
+        }
       return {
         ...state,
         currentOperand: `${state.currentOperand}${action.payload.digit}`,
@@ -82,23 +87,54 @@ export function reducer(state: StateType, action: Action): StateType {
       if (state.currentOperand === "" && state.previousOperand === "")
         return state
       if (state.currentOperand === "") {
+        if (action.payload.operation === "/") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationSymbol: "÷",
+          }
+        }
+
         return {
           ...state,
           operation: action.payload.operation,
+          operationSymbol: action.payload.operation,
         }
       }
       if (state.previousOperand === "") {
+        if (action.payload.operation === "/") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationSymbol: "÷",
+            previousOperand: state.currentOperand,
+            currentOperand: "0",
+          }
+        }
         return {
           ...state,
           operation: action.payload.operation,
+          operationSymbol: action.payload.operation,
           previousOperand: state.currentOperand,
           currentOperand: "0",
         }
       }
+
+      if (action.payload.operation === "/") {
+        return {
+          ...state,
+          previousOperand: evaluate(state),
+          operation: action.payload.operation,
+          operationSymbol: "÷",
+          currentOperand: "0",
+        }
+      }
+
       return {
         ...state,
         previousOperand: evaluate(state),
         operation: action.payload.operation,
+        operationSymbol: action.payload.operation,
         currentOperand: "0",
       }
 
@@ -131,6 +167,7 @@ export function reducer(state: StateType, action: Action): StateType {
         ...state,
         previousOperand: "",
         operation: null,
+        operationSymbol: "",
         currentOperand: evaluate(state),
       }
 
