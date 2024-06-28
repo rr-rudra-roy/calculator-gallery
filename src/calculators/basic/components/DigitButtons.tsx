@@ -16,6 +16,7 @@ export function DigitButton({
     <>
       <button
         type="button"
+        data-testid={digit}
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: digit } })
@@ -36,6 +37,7 @@ export function PeriodButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     <>
       <button
         type="button"
+        data-testid="."
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
         onClick={() =>
           dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: "." } })
