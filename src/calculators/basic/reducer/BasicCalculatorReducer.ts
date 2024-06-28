@@ -140,6 +140,8 @@ export function reducer(state: StateType, action: Action): StateType {
 
     case ActionType.PLUS_MINUS:
       if (state.currentOperand === "") return state
+      if (state.currentOperand === "0") return state
+      if (state.currentOperand === ".") return state
       return {
         ...state,
         currentOperand: (parseFloat(state.currentOperand) * -1).toString(),

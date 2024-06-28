@@ -43,6 +43,10 @@ playwright/.local-browsers/
 
 # Ignore Playwright reports
 playwright-report/
+blob-report/
+
+# Ignore Playwright cache
+playwright/.cache/
 
 # Ignore Playwright traces (if you're using tracing)
 playwright-trace/
