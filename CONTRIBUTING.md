@@ -6,12 +6,18 @@ The following is a set of guidelines for contributing to this project. Please ta
 
 ## Ways to Contribute
 
-### Reporting Issues
+### Reporting Bugs
 
-If you encounter a bug, have a feature request, or have questions about the project:
+If you encounter a bug, or have questions about the project:
 
 - Check the [issue tracker](https://github.com/rr-rudra-roy/calculator-gallery/issues) to see if the issue has already been reported.
 - If not, open a new issue with a descriptive title and detailed description, including steps to reproduce (if it's a bug).
+- Provide relevant details such as your operating system and version.
+
+### Feature Requests
+
+- Use the GitHub [issue tracker](https://github.com/rr-rudra-roy/calculator-gallery/issues) to request new features.
+- Explain the use case and why it is important.
 
 ### Submitting Pull Requests
 
