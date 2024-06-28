@@ -34,3 +34,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore Playwright test results
+test-results/
+
+# Ignore Playwright browser binaries (optional, if you don't want to download them each time)
+playwright/.local-browsers/
+
+# Ignore Playwright reports
+playwright-report/
+
+# Ignore Playwright traces (if you're using tracing)
+playwright-trace/
