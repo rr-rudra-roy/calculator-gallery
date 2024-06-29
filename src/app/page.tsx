@@ -23,12 +23,12 @@ export default function Home() {
       </header>
       <section className="w-full py-8 flex flex-col items-center">
         <h1 className="text-2xl md:text-3xl lg:text-5xl font-bold text-nowrap whitespace-nowrap text-white">
-          React Calculator Gallery
+          Calculator Gallery
         </h1>
         <div className="my-4 md:my-6 lg:my-8 px-4">
           <h2 className="my-2 max-w-[40rem] w-full text-sm sm:text-base md:text-lg lg:text-xl font-medium text-center text-gray-200">
             Navigate through a gallery of interactive React calculators.
-            Simplify complex calculations effortlessly.
+            Find tools designed to simplify your mathematical tasks.
           </h2>
         </div>
         <div className="my-4 md:my-8 lg:my-12 flex gap-4">

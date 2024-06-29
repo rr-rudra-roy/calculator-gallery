@@ -1,4 +1,5 @@
 export const SEO = {
-    title: "React Calculator Gallery",
-    description: "Navigate through a gallery of interactive React calculators. Simplify complex calculations effortlessly.",
+  title: "Calculator Gallery - Browse Variety of Calculators",
+  description:
+    "Navigate through a gallery of interactive React calculators. Variety of calculators tailored to different needs. Find tools designed to simplify your mathematical tasks.",
 }
