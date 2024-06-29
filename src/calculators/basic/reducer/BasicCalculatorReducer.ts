@@ -1,7 +1,10 @@
 import { create, all } from "mathjs"
 
 // Create a mathjs instance
-const math = create(all, {})
+const math = create(all, {
+  number: "BigNumber", // Use BigNumber for all calculations
+  precision: 64, // Set a high precision to ensure accuracy
+})
 
 // Define state type
 export interface StateType {
@@ -69,10 +72,8 @@ export const INITIAL_STATE: StateType = {
 export function reducer(state: StateType, action: Action): StateType {
   switch (action.type) {
     case ActionType.ADD_DIGIT:
-      if (action.payload.digit === "0" && state.currentOperand === "0")
-        return state
-      if (action.payload.digit === "." && state.currentOperand.includes("."))
-        return state
+      if (action.payload.digit === "0" && state.currentOperand === "0") return state
+      if (action.payload.digit === "." && state.currentOperand.includes(".")) return state
       if (action.payload.digit !== "0" && state.currentOperand === "0")
         return {
           ...state,
@@ -84,8 +85,7 @@ export function reducer(state: StateType, action: Action): StateType {
       }
 
     case ActionType.CHOOSE_OPERATION:
-      if (state.currentOperand === "" && state.previousOperand === "")
-        return state
+      if (state.currentOperand === "" && state.previousOperand === "") return state
       if (state.currentOperand === "") {
         if (action.payload.operation === "/") {
           return {
@@ -158,11 +158,7 @@ export function reducer(state: StateType, action: Action): StateType {
       }
 
     case ActionType.CALCULATE:
-      if (
-        state.operation == null ||
-        state.currentOperand === "" ||
-        state.previousOperand === ""
-      ) {
+      if (state.operation == null || state.currentOperand === "" || state.previousOperand === "") {
         return state
       }
       return {
@@ -179,11 +175,7 @@ export function reducer(state: StateType, action: Action): StateType {
 }
 
 // Use mathjs to evaluate the expression
-function evaluate({
-  currentOperand,
-  previousOperand,
-  operation,
-}: StateType): string {
+function evaluate({ currentOperand, previousOperand, operation }: StateType): string {
   const expression = `${previousOperand} ${operation} ${currentOperand}`
   try {
     return math.evaluate(expression).toString()

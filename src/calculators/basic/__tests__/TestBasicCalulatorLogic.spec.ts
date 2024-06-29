@@ -5,9 +5,6 @@ const basicCalculatorPageUrl = "http://localhost:3000/calculators/basic"
 
 // Calculator buttons locator
 const outputDisplay = "div#currentOperand"
-
-const ClearButton = "button#clear-button"
-const BackspaceButton = "button#backspace-button"
 const EvaluateButton = "button#evaluate-button"
 
 const DigitZero = 'button[data-testid="0"]'
@@ -119,5 +116,25 @@ test.describe("Test Calculator Logic", () => {
     await page.click(DigitTwo) // Click 2
     await page.click(EvaluateButton) // Click =
     await expect(page.locator(outputDisplay)).toHaveText("6")
+  })
+
+  // Decimal operation
+  test("should handle decimal addition correctly", async ({ page }) => {
+    await page.goto(basicCalculatorPageUrl)
+    await page.click(periodButton)
+    await page.click(DigitOne)
+    await page.click(AdditionButton)
+    await page.click(periodButton)
+    await page.click(DigitTwo)
+    await page.click(EvaluateButton)
+    await expect(page.locator(outputDisplay)).toHaveText("0.3")
+  })
+
+  // Check plus minus operation
+  test("should handle plus minus operation correctly", async ({ page }) => {
+    await page.goto(basicCalculatorPageUrl)
+    await page.click(DigitTwo)
+    await page.click(PlusMinusButtonButton)
+    await expect(page.locator(outputDisplay)).toHaveText("-2")
   })
 })
