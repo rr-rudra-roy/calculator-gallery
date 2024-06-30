@@ -1,10 +1,10 @@
 import { Metadata } from "next"
+import { SEO } from "@/data/seo"
 import BasicCalculator from "@/calculators/basic/BasicCalculator"
 
 export const metadata: Metadata = {
-  title: "Basic Calculator",
-  description:
-    "Basic 4 function calculator. This calculator include all arithmetic operations including plus minus and modulus operations.",
+  title: SEO.basicCalculatorTitle,
+  description: SEO.basicCalculatorDescription,
 }
 
 export default function Page() {
