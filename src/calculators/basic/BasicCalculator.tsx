@@ -65,7 +65,7 @@ export default function BasicCalculator() {
   return (
     <>
       <main className={`w-full h-full ${theme}`}>
-        <section className="w-full h-full bg-white dark:bg-darkJungleGreen">
+        <section className="w-full h-full bg-white dark:bg-darkJungleGreen transition-colors duration-300">
           <div>
             <Header />
           </div>
