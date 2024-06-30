@@ -3,56 +3,48 @@ import { useEffect, useReducer, useCallback } from "react"
 import Header from "@/layouts/Header"
 import Footer from "@/layouts/Footer"
 import { useTheme } from "@/context/ThemeContext"
+import { INITIAL_STATE, reducer, ActionType } from "./reducer/ScientificCalculatorReducer"
+import { PIButton, EulersNumber } from "./components/Constants"
+import { DigitButton, PeriodButton } from "./components/DigitButtons"
 import {
-  INITIAL_STATE,
-  reducer,
-  ActionType,
-} from "./reducer/ScientificCalculatorReducer"
-import {
-  DigitButton,
-  ACButton,
-  BackSpaceButton,
   AdditionOperationButton,
   SubtractionOperationButton,
   MultiplicationOperationButton,
   DivisonOperationButton,
   ModulusOperationButton,
-  PIButton,
-  PeriodButton,
   PlusMinusButton,
-  EqualButton,
+  OneDividedByX,
+  XFactorial,
+} from "./components/OperatorButtons"
+import {
   SinButton,
   CosButton,
   TanButton,
   SinInverseButton,
   CosInverseButton,
   TanInverseButton,
+  DegreeRadianToggle,
+} from "./components/TrignometricButtons"
+import {
   XToThePowerTwo,
   XToThePowerThree,
   XToThePowerTen,
-  EulersNumber,
   EToThePowerX,
-  OneDividedByX,
-  XFactorial,
   SquareRoot,
-  CommonLog,
-  NaturalLog,
-  MemoryPlus,
-  MemoryMinus,
-  MemoryRemember,
   CubeRoot,
-  ParenthesesLeft,
-  ParenthesesRight,
-  DegreeRadianToggle,
-} from "./components/CalculatorButtons"
+} from "./components/ExponentialButtons"
+import { CommonLog, NaturalLog } from "./components/LogButtons"
+import { ParenthesesLeft, ParenthesesRight } from "./components/ParenthesesButtons"
+import { MemoryPlus, MemoryMinus, MemoryRemember } from "./components/MemoryButtons"
+import { ACButton, BackSpaceButton, EqualButton } from "./components/CalculatorButtons"
 
 export default function ScientificCalculator() {
   const { theme, toggleTheme } = useTheme()
 
-  const [
-    { previousOperand, currentOperand, operation, memory, degOrRad },
-    dispatch,
-  ] = useReducer(reducer, INITIAL_STATE)
+  const [{ previousOperand, currentOperand, operation, memory, degOrRad }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  )
 
   // Handle key press events
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
@@ -118,7 +110,7 @@ export default function ScientificCalculator() {
                   <CosButton dispatch={dispatch} />
                   <TanButton dispatch={dispatch} />
 
-                  <PIButton theme={theme} dispatch={dispatch} />
+                  <PIButton dispatch={dispatch} />
                   <EulersNumber dispatch={dispatch} />
                   <SinInverseButton dispatch={dispatch} />
                   <CosInverseButton dispatch={dispatch} />
@@ -130,7 +122,7 @@ export default function ScientificCalculator() {
                   <XToThePowerThree dispatch={dispatch} />
                   <XToThePowerTen dispatch={dispatch} />
 
-                  <OneDividedByX dispatch={dispatch}  />
+                  <OneDividedByX dispatch={dispatch} />
                   <ParenthesesLeft />
                   <ParenthesesRight />
                   <ModulusOperationButton dispatch={dispatch} />
@@ -148,13 +140,13 @@ export default function ScientificCalculator() {
                   <DigitButton digit="6" dispatch={dispatch} />
                   <SubtractionOperationButton dispatch={dispatch} />
 
-                  <CommonLog dispatch={dispatch}  />
+                  <CommonLog dispatch={dispatch} />
                   <DigitButton digit="1" dispatch={dispatch} />
                   <DigitButton digit="2" dispatch={dispatch} />
                   <DigitButton digit="3" dispatch={dispatch} />
                   <AdditionOperationButton dispatch={dispatch} />
 
-                  <NaturalLog dispatch={dispatch}  />
+                  <NaturalLog dispatch={dispatch} />
                   <PlusMinusButton theme={theme} dispatch={dispatch} />
                   <DigitButton digit="0" dispatch={dispatch} />
                   <PeriodButton dispatch={dispatch} />
