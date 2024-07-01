@@ -3,11 +3,7 @@ import { useEffect, useReducer, useCallback } from "react"
 import Header from "@/layouts/Header"
 import Footer from "@/layouts/Footer"
 import { useTheme } from "@/context/ThemeContext"
-import {
-  INITIAL_STATE,
-  ActionType,
-  reducer,
-} from "./reducer/BasicCalculatorReducer"
+import { INITIAL_STATE, ActionType, reducer } from "./reducer/BasicCalculatorReducer"
 import { DigitButton, PeriodButton } from "./components/DigitButtons"
 import {
   AdditionOperationButton,
@@ -17,16 +13,14 @@ import {
   ModulusOperationButton,
   PlusMinusButton,
 } from "./components/OperatorButtons"
-import {
-  ACButton,
-  BackSpaceButton,
-  EqualButton,
-} from "./components/CalculatorButtons"
+import { ACButton, BackSpaceButton, EqualButton } from "./components/CalculatorButtons"
 
 export default function BasicCalculator() {
   const { theme, toggleTheme } = useTheme()
-  const [{ previousOperand, currentOperand, operationSymbol }, dispatch] =
-    useReducer(reducer, INITIAL_STATE)
+  const [{ previousOperand, currentOperand, operationSymbol }, dispatch] = useReducer(
+    reducer,
+    INITIAL_STATE
+  )
 
   // Handle key press events
   const handleKeyPress = useCallback((event: KeyboardEvent) => {

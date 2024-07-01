@@ -1,4 +1,3 @@
-
 # Calculator Gallery
 
 Calculator Gallery is a project consisting of a basic calculator, scientific calculator, and matrix calculator built using React.
@@ -6,16 +5,15 @@ Calculator Gallery is a project consisting of a basic calculator, scientific cal
 ## Features
 
 - Basic Calculator:
-    - Performs addition, subtraction, multiplication, and division.
-    - Handles decimal numbers and basic arithmetic operations.
+  - Performs addition, subtraction, multiplication, and division.
+  - Handles decimal numbers and basic arithmetic operations.
 - Scientific Calculator:
-    - Includes advanced functions such as trigonometric, logarithmic, and exponential functions.
-    - Supports parentheses for complex expressions.
+  - Includes advanced functions such as trigonometric, logarithmic, and exponential functions.
+  - Supports parentheses for complex expressions.
 - Matrix Calculator:
-    - Performs matrix operations such as addition, subtraction, multiplication, and determinant calculation.
-    - Supports matrices of varying dimensions.
+  - Performs matrix operations such as addition, subtraction, multiplication, and determinant calculation.
+  - Supports matrices of varying dimensions.
 
-    
 ## Usage
 
 - Select the calculator mode (Basic, Scientific, Matrix) from home page.
@@ -29,17 +27,16 @@ Calculator Gallery is a project consisting of a basic calculator, scientific cal
 - Tailwind css
 - Math.js
 
-
 ## Installation
 
 To run this project locally, follow these steps:
 
-#### Clone repository; 
+#### Clone repository;
 
 ```bash
   git clone https://github.com/rr-rudra-roy/calculator-gallery.git
 ```
-    
+
 #### Navigate into the project directory:
 
 ```bash

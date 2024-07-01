@@ -5,9 +5,7 @@ import { SOCIAL } from "@/data/social"
 
 export default function Home() {
   return (
-    <main
-      className={` ${spaceGrotesk.className} relative h-full w-full bg-darkJungleGreen`}
-    >
+    <main className={` ${spaceGrotesk.className} relative h-full w-full bg-darkJungleGreen`}>
       <header className="w-full py-4 md:py-8 lg:py-12 px-8 sm:px-12 md:px-24 lg:px-32">
         <a href="/">
           <Image
@@ -27,8 +25,8 @@ export default function Home() {
         </h1>
         <div className="my-4 md:my-6 lg:my-8 px-4">
           <h2 className="my-2 max-w-[40rem] w-full text-sm sm:text-base md:text-lg lg:text-xl font-medium text-center text-gray-200">
-            Navigate through a gallery of interactive React calculators.
-            Find tools designed to simplify your mathematical tasks.
+            Navigate through a gallery of interactive React calculators. Find tools designed to
+            simplify your mathematical tasks.
           </h2>
         </div>
         <div className="my-4 md:my-8 lg:my-12 flex gap-4">
@@ -74,9 +72,7 @@ export default function Home() {
       </section>
       <section className="w-full py-8 md:py-16 lg:py-24">
         <div className="w-full text-center">
-          <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-gray-200">
-            CALCULATORS
-          </h1>
+          <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-gray-200">CALCULATORS</h1>
         </div>
         <div className="w-full mt-6 sm:mt-8 md:mt-12 lg:mt-16">
           <div className="w-full lg:max-w-[1280px] mx-auto px-4 lg:px-0 flex flex-col lg:flex-row justify-center items-center gap-4 lg:gap-8">
@@ -192,9 +188,7 @@ export default function Home() {
       </section>
       <footer className="w-full lg:max-w-[1280px] py-8 lg:py-16 px-4 lg:px-0 mx-auto flex justify-between items-center gap-2.5">
         <div className="flex justify-center items-center">
-          <span
-            className={`${LATO_400.className} text-sm lg:text-base text-gray-300`}
-          >
+          <span className={`${LATO_400.className} text-sm lg:text-base text-gray-300`}>
             Copyright
           </span>
           <div className="mx-1 sm:mx-2">
@@ -206,18 +200,12 @@ export default function Home() {
               <path d="M400-320h160q17 0 28.5-11.5T600-360v-80h-80v40h-80v-160h80v40h80v-80q0-17-11.5-28.5T560-640H400q-17 0-28.5 11.5T360-600v240q0 17 11.5 28.5T400-320Zm80 240q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
             </svg>
           </div>
-          <span
-            className={`${LATO_400.className} text-sm lg:text-base text-gray-300`}
-          >
+          <span className={`${LATO_400.className} text-sm lg:text-base text-gray-300`}>
             2024 Rudra Roy
           </span>
         </div>
         <div className="flex justify-center items-center gap-4">
-          <a
-            href={`${SOCIAL.githubProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.githubProfile}`} target="_blank" rel="noopener noreferrer">
             <Image
               src={"/logo/github-mark-white.svg"}
               alt="Github Icon"
@@ -227,11 +215,7 @@ export default function Home() {
               className="h-6 w-6"
             />
           </a>
-          <a
-            href={`${SOCIAL.facebookProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.facebookProfile}`} target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -240,11 +224,7 @@ export default function Home() {
               <path d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z" />
             </svg>
           </a>
-          <a
-            href={`${SOCIAL.twitterProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.twitterProfile}`} target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"

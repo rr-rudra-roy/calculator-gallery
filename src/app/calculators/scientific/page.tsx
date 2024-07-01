@@ -4,7 +4,7 @@ import ScientificCalculator from "@/calculators/scientific/ScientificCalculator"
 
 export const metadata: Metadata = {
   title: SEO.scientificCalculatorTitle,
-  description: SEO.ScientificCalculatorDescription
+  description: SEO.ScientificCalculatorDescription,
 }
 
 export default function Page() {

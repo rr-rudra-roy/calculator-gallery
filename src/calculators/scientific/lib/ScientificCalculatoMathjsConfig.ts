@@ -8,11 +8,7 @@ export const math = create(all, {
 })
 
 // Use mathjs to evaluate the expression
-export function evaluate({
-  currentOperand,
-  previousOperand,
-  operation,
-}: StateType): string {
+export function evaluate({ currentOperand, previousOperand, operation }: StateType): string {
   const expression = `${previousOperand} ${operation} ${currentOperand}`
   try {
     return math.evaluate(expression).toString()

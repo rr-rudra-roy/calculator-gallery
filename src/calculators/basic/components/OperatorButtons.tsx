@@ -1,15 +1,8 @@
 import { Dispatch } from "react"
-import {
-  Action,
-  ActionType,
-} from "@/calculators/basic/reducer/BasicCalculatorReducer"
+import { Action, ActionType } from "@/calculators/basic/reducer/BasicCalculatorReducer"
 import { spaceGrotesk } from "@/lib/fonts"
 
-export function AdditionOperationButton({
-  dispatch,
-}: {
-  dispatch: Dispatch<Action>
-}) {
+export function AdditionOperationButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
@@ -34,11 +27,7 @@ export function AdditionOperationButton({
   )
 }
 
-export function SubtractionOperationButton({
-  dispatch,
-}: {
-  dispatch: Dispatch<Action>
-}) {
+export function SubtractionOperationButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
@@ -63,11 +52,7 @@ export function SubtractionOperationButton({
   )
 }
 
-export function MultiplicationOperationButton({
-  dispatch,
-}: {
-  dispatch: Dispatch<Action>
-}) {
+export function MultiplicationOperationButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
@@ -121,33 +106,16 @@ export function DivisonOperationButton({
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 aspect-auto fill-gray-900 dark:fill-white"
         >
-          <path
-            d="M6.34277 12L17.6565 12"
-            stroke={theme === "light" ? "#000000" : "#FFFFFF"}
-          />
-          <circle
-            cx="12"
-            cy="16.9498"
-            r="1.5"
-            transform="rotate(45 12 16.9498)"
-          />
-          <circle
-            cx="12"
-            cy="7.05024"
-            r="1.5"
-            transform="rotate(45 12 7.05024)"
-          />
+          <path d="M6.34277 12L17.6565 12" stroke={theme === "light" ? "#000000" : "#FFFFFF"} />
+          <circle cx="12" cy="16.9498" r="1.5" transform="rotate(45 12 16.9498)" />
+          <circle cx="12" cy="7.05024" r="1.5" transform="rotate(45 12 7.05024)" />
         </svg>
       </button>
     </>
   )
 }
 
-export function ModulusOperationButton({
-  dispatch,
-}: {
-  dispatch: Dispatch<Action>
-}) {
+export function ModulusOperationButton({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
@@ -193,10 +161,7 @@ export function PlusMinusButton({
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 aspect-auto fill-gray-900 dark:fill-gray-100"
         >
-          <path
-            d="M12 4V14M7 9H17M7 20H17"
-            stroke={theme === "light" ? "#000000" : "#FFFFFF"}
-          />
+          <path d="M12 4V14M7 9H17M7 20H17" stroke={theme === "light" ? "#000000" : "#FFFFFF"} />
         </svg>
       </button>
     </>

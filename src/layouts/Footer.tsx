@@ -31,11 +31,7 @@ export default function Footer() {
           </span>
         </div>
         <div className="flex justify-center items-center gap-4">
-          <a
-            href={`${SOCIAL.githubProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.githubProfile}`} target="_blank" rel="noopener noreferrer">
             <Image
               src={theme === "light" ? "/logo/github-mark.svg" : "/logo/github-mark-white.svg"}
               alt="Github Icon"
@@ -45,11 +41,7 @@ export default function Footer() {
               className="h-6 w-6"
             />
           </a>
-          <a
-            href={`${SOCIAL.facebookProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.facebookProfile}`} target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
@@ -58,11 +50,7 @@ export default function Footer() {
               <path d="M480 257.35c0-123.7-100.3-224-224-224s-224 100.3-224 224c0 111.8 81.9 204.47 189 221.29V322.12h-56.89v-64.77H221V208c0-56.13 33.45-87.16 84.61-87.16 24.51 0 50.15 4.38 50.15 4.38v55.13H327.5c-27.81 0-36.51 17.26-36.51 35v42h62.12l-9.92 64.77H291v156.54c107.1-16.81 189-109.48 189-221.31z" />
             </svg>
           </a>
-          <a
-            href={`${SOCIAL.twitterProfile}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={`${SOCIAL.twitterProfile}`} target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"

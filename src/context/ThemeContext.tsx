@@ -9,9 +9,7 @@ interface ThemeContextType {
   toggleTheme: () => void
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(
-  undefined
-)
+export const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
 export const useTheme = () => {
   const context = useContext(ThemeContext)
@@ -21,15 +19,9 @@ export const useTheme = () => {
   return context
 }
 
-export default function ThemeProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light") // Default theme
-  const preferredTheme = useMediaQuery("(prefers-color-scheme: dark)")
-    ? "dark"
-    : "light"
+  const preferredTheme = useMediaQuery("(prefers-color-scheme: dark)") ? "dark" : "light"
 
   useEffect(() => {
     // Check local storage for saved theme preference
@@ -45,7 +37,7 @@ export default function ThemeProvider({
     }
   }, [preferredTheme])
 
-  useEffect(()=>{
+  useEffect(() => {
     // change local storage theme value if theme changed
     localStorage.setItem("theme", theme)
   }, [theme])
@@ -56,9 +48,7 @@ export default function ThemeProvider({
 
   return (
     <>
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        {children}
-      </ThemeContext.Provider>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
     </>
   )
 }

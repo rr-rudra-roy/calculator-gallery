@@ -1,8 +1,5 @@
 import { Dispatch } from "react"
-import {
-  Action,
-  ActionType,
-} from "@/calculators/basic/reducer/BasicCalculatorReducer"
+import { Action, ActionType } from "@/calculators/basic/reducer/BasicCalculatorReducer"
 import { spaceGrotesk } from "@/lib/fonts"
 
 export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
@@ -64,9 +61,7 @@ export function EqualButton({ dispatch }: { dispatch: Dispatch<Action> }) {
         onClick={() => dispatch({ type: ActionType.CALCULATE })}
       >
         <span className="sr-only">Equal</span>
-        <span
-          className={`${spaceGrotesk.className} text-xl md:text-2xl lg:text-4xl text-gray-50`}
-        >
+        <span className={`${spaceGrotesk.className} text-xl md:text-2xl lg:text-4xl text-gray-50`}>
           =
         </span>
       </button>

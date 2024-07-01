@@ -25,7 +25,7 @@ const config: Config = {
         oceanBlue: "#4746B8",
         cosmicCobalt: "#2f2f7b",
         goldenYellow: "#FFDD00",
-        safetyYellow: "#F2D100"
+        safetyYellow: "#F2D100",
       },
     },
     fontFamily: {
