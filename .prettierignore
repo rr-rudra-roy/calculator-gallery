@@ -1,3 +1,47 @@
-.next
+# next.js
+/.next/
+/out/
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Ignore test coverage
 coverage
-node_modules
+
+# Ignore public folder
+public
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Ignore Playwright test results
+test-results/
+
+# Ignore Playwright browser binaries (optional, if you don't want to download them each time)
+playwright/.local-browsers/
+
+# Ignore Playwright reports
+playwright-report/
+blob-report/
+
+# Ignore Playwright cache
+playwright/.cache/
+
+# Ignore Playwright traces (if you're using tracing)
+playwright-trace/
