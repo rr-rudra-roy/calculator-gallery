@@ -73,12 +73,19 @@ export function reducer(state: StateType, action: Action): StateType {
   switch (action.type) {
     case ActionType.ADD_DIGIT:
       if (action.payload.digit === "0" && state.currentOperand === "0") return state
+
+      // If currentOperand is zero and payload digit is not preiod replace 0 with provided payload digit.
+      // If payload is period then keep zero in currentOperand
+      if (
+        action.payload.digit !== "0" &&
+        action.payload.digit !== "." &&
+        state.currentOperand === "0"
+      )
+        return { ...state, currentOperand: `${action.payload.digit}` }
+
+      // If only preiod is present in currentOperand don't add another.
       if (action.payload.digit === "." && state.currentOperand.includes(".")) return state
-      if (action.payload.digit !== "0" && state.currentOperand === "0")
-        return {
-          ...state,
-          currentOperand: `${action.payload.digit}`,
-        }
+
       return {
         ...state,
         currentOperand: `${state.currentOperand}${action.payload.digit}`,
@@ -87,6 +94,14 @@ export function reducer(state: StateType, action: Action): StateType {
     case ActionType.CHOOSE_OPERATION:
       if (state.currentOperand === "" && state.previousOperand === "") return state
       if (state.currentOperand === "") {
+        if (action.payload.operation === "*") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationSymbol: "×",
+          }
+        }
+
         if (action.payload.operation === "/") {
           return {
             ...state,
@@ -94,7 +109,6 @@ export function reducer(state: StateType, action: Action): StateType {
             operationSymbol: "÷",
           }
         }
-
         return {
           ...state,
           operation: action.payload.operation,
@@ -102,6 +116,16 @@ export function reducer(state: StateType, action: Action): StateType {
         }
       }
       if (state.previousOperand === "") {
+        if (action.payload.operation === "*") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationSymbol: "×",
+            previousOperand: state.currentOperand,
+            currentOperand: "0",
+          }
+        }
+
         if (action.payload.operation === "/") {
           return {
             ...state,
@@ -111,11 +135,22 @@ export function reducer(state: StateType, action: Action): StateType {
             currentOperand: "0",
           }
         }
+
         return {
           ...state,
           operation: action.payload.operation,
           operationSymbol: action.payload.operation,
           previousOperand: state.currentOperand,
+          currentOperand: "0",
+        }
+      }
+
+      if (action.payload.operation === "*") {
+        return {
+          ...state,
+          previousOperand: evaluate(state),
+          operation: action.payload.operation,
+          operationSymbol: "×",
           currentOperand: "0",
         }
       }
