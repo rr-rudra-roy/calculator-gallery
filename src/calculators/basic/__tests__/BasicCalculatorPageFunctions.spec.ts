@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test"
+import { SEO } from "@/data/seo"
 
 // Basic calculator page url
 const basicCalculatorPageUrl = "http://localhost:3000/calculators/basic"
@@ -10,6 +11,6 @@ test.describe("Is Document Loading", () => {
     await page.goto(basicCalculatorPageUrl)
 
     // Check if the page loaded by verifying the title contains "Basic Calculator"
-    await expect(page).toHaveTitle("Basic Calculator")
+    await expect(page).toHaveTitle(SEO.basicCalculatorTitle)
   })
 })
