@@ -1,5 +1,8 @@
 import { Dispatch } from "react"
-import { Action, ActionType } from "@/calculators/scientific/reducer/ScientificCalculatorReducer"
+import {
+  Action,
+  DigitActionType,
+} from "@/calculators/scientific/reducer/ScientificCalculatorReducerType"
 import { spaceGrotesk } from "@/lib/fonts"
 
 export function DigitButton({
@@ -14,7 +17,7 @@ export function DigitButton({
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: digit } })}
+        onClick={() => dispatch({ type: DigitActionType.ADD_DIGIT, payload: { digit: digit } })}
       >
         <span
           className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
@@ -32,7 +35,7 @@ export function PeriodButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.ADD_DIGIT, payload: { digit: "." } })}
+        onClick={() => dispatch({ type: DigitActionType.ADD_DIGIT, payload: { digit: "." } })}
       >
         <span className="sr-only">Period</span>
         <span

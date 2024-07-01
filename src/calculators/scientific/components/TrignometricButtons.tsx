@@ -1,5 +1,8 @@
 import { Dispatch } from "react"
-import { Action, ActionType } from "@/calculators/scientific/reducer/ScientificCalculatorReducer"
+import {
+  Action,
+  TrignometricActionType,
+} from "@/calculators/scientific/reducer/ScientificCalculatorReducerType"
 import { spaceGrotesk } from "@/lib/fonts"
 
 export function DegreeRadianToggle({
@@ -19,11 +22,11 @@ export function DegreeRadianToggle({
         ></div>
         <button
           type="button"
-          className={`flex-grow`}
+          className={`h-full w-full flex-grow`}
           onClick={() =>
             dispatch({
-              type: ActionType.SET_DEGREE_AND_RADIANS,
-              payload: { value: "deg" },
+              type: TrignometricActionType.TOOGLE_DEGREE_AND_RADIANS,
+              payload: { degOrRad: "deg" },
             })
           }
         >
@@ -34,19 +37,16 @@ export function DegreeRadianToggle({
             Deg
           </span>
         </button>
-        <button
-          type="button"
-          className="flex-grow"
-          onClick={() =>
-            dispatch({
-              type: ActionType.SET_DEGREE_AND_RADIANS,
-              payload: { value: "rad" },
-            })
-          }
-        >
+        <button type="button" className="h-full w-full flex-grow">
           <span className="sr-only">Radians</span>
           <span
             className={`${spaceGrotesk.className} text-sm md:text-base font-semibold text-blue-600 dark:text-blue-500`}
+            onClick={() =>
+              dispatch({
+                type: TrignometricActionType.TOOGLE_DEGREE_AND_RADIANS,
+                payload: { degOrRad: "rad" },
+              })
+            }
           >
             Rad
           </span>
@@ -62,7 +62,7 @@ export function SinButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_SIN })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_SIN })}
       >
         <span
           className={`${spaceGrotesk.className} text-sm lg:text-base text-gray-900 dark:text-gray-100`}
@@ -80,7 +80,7 @@ export function CosButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_COS })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_COS })}
       >
         <span
           className={`${spaceGrotesk.className} text-sm lg:text-base text-gray-900 dark:text-gray-100`}
@@ -98,7 +98,7 @@ export function TanButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_TAN })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_TAN })}
       >
         <span
           className={`${spaceGrotesk.className} text-sm lg:text-base text-gray-900 dark:text-gray-100`}
@@ -116,7 +116,7 @@ export function SinInverseButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_SIN_INVERSE })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_SIN_INVERSE })}
       >
         <span
           className={`${spaceGrotesk.className} text-sm lg:text-base text-gray-900 dark:text-gray-100`}
@@ -135,7 +135,7 @@ export function CosInverseButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_COS_INVERSE })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_COS_INVERSE })}
       >
         <span
           className={`${spaceGrotesk.className} text-sm lg:text-base text-gray-900 dark:text-gray-100`}
@@ -154,7 +154,7 @@ export function TanInverseButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_TAN_INVERSE })}
+        onClick={() => dispatch({ type: TrignometricActionType.CALCULATE_TAN_INVERSE })}
       >
         <span className="sr-only">Tan Inverse</span>
         <span

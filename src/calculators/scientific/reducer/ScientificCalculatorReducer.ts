@@ -1,208 +1,26 @@
-import { create, all } from "mathjs"
-import { convertDegreeToRadians, convertRadiansToDegree } from "@/utils/funcs"
-
-// Create a mathjs instance
-const math = create(all, {})
-
-// Define state type
-export interface StateType {
-  currentOperand: string
-  previousOperand: string
-  operation: string | null
-  memory: string
-  degOrRad: "deg" | "rad"
-}
-
-// Define action type
-export enum ActionType {
-  ADD_DIGIT = "ADD_DIGIT",
-  CHOOSE_OPERATION = "CHOOSE_OPERATION",
-  PLUS_MINUS = "PLUS_MINUS",
-  CALCULATE_SQUARE = "CALCULATE_SQUARE",
-  CALCULATE_CUBE = "CALCULATE_CUBE",
-  CALCULATE_POWER_TEN = "CALCULATE_POWER_TEN",
-  CALCULATE_SQUARE_ROOT = "CALCULATE_SQUARE_ROOT",
-  CALCULATE_CUBE_ROOT = "CALCULATE_CUBE_ROOT",
-  CALCULATE_FACTORIAL = "CALCULATE_FACTORIAL",
-  CALCULATE_INVERSE = "CALCULATE_INVERSE",
-  ADD_PI = "ADD_PI",
-  ADD_EULERS_NUMBER = "ADD_EULERS_NUMBER",
-  CALCULATE_EULERS_POWER = "CALCULATE_EULERS_POWER",
-  CALCULATE_NATURAL_LOG = "CALCULATE_NATURAL_LOG",
-  CALCULATE_BASE_10_LOG = "CALCULATE_BASE_10_LOG",
-  CALCULATE_SIN = "CALCULATE_SIN",
-  CALCULATE_COS = "CALCULATE_COS",
-  CALCULATE_TAN = "CALCULATE_TAN",
-  CALCULATE_SIN_INVERSE = "CALCULATE_SIN_INVERSE",
-  CALCULATE_COS_INVERSE = "CALCULATE_COS_INVERSE",
-  CALCULATE_TAN_INVERSE = "CALCULATE_TAN_INVERSE",
-  SET_DEGREE_AND_RADIANS = "SET_DEGREE_AND_RADIANS",
-  ADD_MEMORY = "ADD_MEMORY",
-  SUBTRACT_MEMORY = "SUBTRACT_MEMORY",
-  RECALL_MEMORY = "RECALL_MEMORY",
-  CLEAR_MEMORY = "CLEAR_MEMORY",
-  CLEAR = "CLEAR",
-  BACKSPACE = "BACKSPACE",
-  EVALUATE = "EVALUATE",
-}
-
-// Define the shape of action objects with custom payload types
-interface AddDigitAction {
-  type: ActionType.ADD_DIGIT
-  payload: { digit: string }
-}
-
-interface ChooseOperationAction {
-  type: ActionType.CHOOSE_OPERATION
-  payload: { operation: string }
-}
-
-interface ToogleSign {
-  type: ActionType.PLUS_MINUS
-}
-
-interface CalculateSquare {
-  type: ActionType.CALCULATE_SQUARE
-}
-
-interface CalculateCube {
-  type: ActionType.CALCULATE_CUBE
-}
-
-interface CalculatePowerTen {
-  type: ActionType.CALCULATE_POWER_TEN
-}
-
-interface CalculateSquareRoot {
-  type: ActionType.CALCULATE_SQUARE_ROOT
-}
-
-interface CalculateCubeRoot {
-  type: ActionType.CALCULATE_CUBE_ROOT
-}
-
-interface CalculateFactorial {
-  type: ActionType.CALCULATE_FACTORIAL
-}
-
-interface CalculateInverse {
-  type: ActionType.CALCULATE_INVERSE
-}
-
-interface AddPI {
-  type: ActionType.ADD_PI
-}
-
-interface AddEulersNumber {
-  type: ActionType.ADD_EULERS_NUMBER
-}
-
-interface CalculateEulersPower {
-  type: ActionType.CALCULATE_EULERS_POWER
-}
-
-interface CalculateNaturalLog {
-  type: ActionType.CALCULATE_NATURAL_LOG
-}
-
-interface CalculateBaseTenLog {
-  type: ActionType.CALCULATE_BASE_10_LOG
-}
-
-interface CalculateSin {
-  type: ActionType.CALCULATE_SIN
-}
-
-interface CalculateCos {
-  type: ActionType.CALCULATE_COS
-}
-
-interface CalculateTan {
-  type: ActionType.CALCULATE_TAN
-}
-
-interface CalculateSinInverse {
-  type: ActionType.CALCULATE_SIN_INVERSE
-}
-
-interface CalculateCosInverse {
-  type: ActionType.CALCULATE_COS_INVERSE
-}
-
-interface CalculateTanInverse {
-  type: ActionType.CALCULATE_TAN_INVERSE
-}
-
-interface SetDegreeAndRadians {
-  type: ActionType.SET_DEGREE_AND_RADIANS
-  payload: { value: "deg" | "rad" }
-}
-
-interface MemoryAdd {
-  type: ActionType.ADD_MEMORY
-}
-
-interface MemorySubtract {
-  type: ActionType.SUBTRACT_MEMORY
-}
-
-interface MemoryRecall {
-  type: ActionType.RECALL_MEMORY
-}
-
-interface MemoryClear {
-  type: ActionType.CLEAR_MEMORY
-}
-
-interface ClearAction {
-  type: ActionType.CLEAR
-}
-
-interface BackspaceAction {
-  type: ActionType.BACKSPACE
-}
-
-interface EvaluateAction {
-  type: ActionType.EVALUATE
-}
-
-// Create a union type for all action objects
-export type Action =
-  | AddDigitAction
-  | ChooseOperationAction
-  | ToogleSign
-  | CalculateSquare
-  | CalculateCube
-  | CalculatePowerTen
-  | CalculateSquareRoot
-  | CalculateCubeRoot
-  | CalculateFactorial
-  | CalculateInverse
-  | AddPI
-  | AddEulersNumber
-  | CalculateEulersPower
-  | CalculateNaturalLog
-  | CalculateBaseTenLog
-  | CalculateSin
-  | CalculateCos
-  | CalculateTan
-  | CalculateSinInverse
-  | CalculateCosInverse
-  | CalculateTanInverse
-  | SetDegreeAndRadians
-  | MemoryAdd
-  | MemorySubtract
-  | MemoryRecall
-  | MemoryClear
-  | ClearAction
-  | BackspaceAction
-  | EvaluateAction
+import { math, evaluate } from "@/calculators/scientific/lib/ScientificCalculatoMathjsConfig"
+import {
+  StateType,
+  Action,
+  CalculatorActionType,
+  AddConstantsType,
+  DigitActionType,
+  ExponentialActionType,
+  LogActionType,
+  MemoryActionType,
+  OperationActionType,
+  ParenthesesActionType,
+  TrignometricActionType,
+} from "./ScientificCalculatorReducerType"
+import { isOperationExpressionValid } from "../utils/funcs"
+import { BigNumber, bignumber } from "mathjs"
 
 // Define the initial state
 export const INITIAL_STATE: StateType = {
   currentOperand: "0",
   previousOperand: "",
   operation: null,
+  operationExpression: "",
   memory: "",
   degOrRad: "deg",
 }
@@ -210,341 +28,715 @@ export const INITIAL_STATE: StateType = {
 // Reducer function using mathjs for calculations
 export function reducer(state: StateType, action: Action): StateType {
   switch (action.type) {
-    case ActionType.ADD_DIGIT:
-      if (action.payload.digit === "0" && state.currentOperand === "0")
-        return state
-      if (action.payload.digit === "." && state.currentOperand.includes("."))
-        return state
-      if (action.payload.digit !== "0" && state.currentOperand === "0")
-        return { ...state, currentOperand: `${action.payload.digit}` }
-      return {
-        ...state,
-        currentOperand: `${state.currentOperand}${action.payload.digit}`,
-      }
-
-    case ActionType.CHOOSE_OPERATION:
-      if (state.currentOperand === "" && state.previousOperand === "")
-        return state
-      if (state.currentOperand === "") {
-        return {
-          ...state,
-          operation: action.payload.operation,
-        }
-      }
-      if (state.previousOperand === "") {
-        return {
-          ...state,
-          operation: action.payload.operation,
-          previousOperand: state.currentOperand,
-          currentOperand: "0",
-        }
-      }
-      return {
-        ...state,
-        previousOperand: evaluate(state),
-        operation: action.payload.operation,
-        currentOperand: "0",
-      }
-
-    case ActionType.PLUS_MINUS:
-      if (state.currentOperand === "") return state
-      return {
-        ...state,
-        currentOperand: (parseFloat(state.currentOperand) * -1).toString(),
-      }
-
-    case ActionType.CALCULATE_SQUARE:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.square(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_CUBE:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.cube(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_POWER_TEN:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.pow(parseFloat(state.currentOperand), 10)}`,
-      }
-
-    case ActionType.CALCULATE_SQUARE_ROOT:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.sqrt(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_CUBE_ROOT:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.nthRoot(parseFloat(state.currentOperand), 3)}`,
-      }
-
-    case ActionType.CALCULATE_FACTORIAL:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.factorial(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_INVERSE:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.divide(1, parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.ADD_PI:
-      return { ...state, currentOperand: `${math.pi}` }
-
-    case ActionType.ADD_EULERS_NUMBER:
-      return { ...state, currentOperand: `${math.e}` }
-
-    case ActionType.CALCULATE_EULERS_POWER:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.pow(math.e, parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_NATURAL_LOG:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.log(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_BASE_10_LOG:
-      if (state.currentOperand === "" || state.currentOperand === "0")
-        return state
-      return {
-        ...state,
-        currentOperand: `${math.log10(parseFloat(state.currentOperand))}`,
-      }
-
-    case ActionType.CALCULATE_SIN:
-      let sinRadians: number
-      try {
-        sinRadians = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          sinRadians = convertDegreeToRadians(sinRadians)
-          return {
-            ...state,
-            currentOperand: math.sin(math.unit(sinRadians, "rad")).toString(),
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: math.sin(math.unit(sinRadians, "rad")).toString(),
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.CALCULATE_COS:
-      let cosRadians: number
-      try {
-        cosRadians = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          cosRadians = convertDegreeToRadians(cosRadians)
-          return {
-            ...state,
-            currentOperand: `${Math.cos(cosRadians)}`,
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: `${Math.cos(cosRadians)}`,
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.CALCULATE_TAN:
-      let tanRadians: number
-      try {
-        tanRadians = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          tanRadians = convertDegreeToRadians(tanRadians)
-          return {
-            ...state,
-            currentOperand: `${Math.tan(tanRadians)}`,
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: `${Math.tan(tanRadians)}`,
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.CALCULATE_SIN_INVERSE:
-      let sinInverseValue: number
-      try {
-        sinInverseValue = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          return {
-            ...state,
-            currentOperand: `${convertRadiansToDegree(
-              Math.asin(sinInverseValue)
-            )}`,
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: `${Math.asin(sinInverseValue)}`,
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.CALCULATE_COS_INVERSE:
-      let cosInverseValue: number
-      try {
-        cosInverseValue = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          return {
-            ...state,
-            currentOperand: `${convertRadiansToDegree(
-              Math.acos(cosInverseValue)
-            )}`,
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: `${Math.acos(cosInverseValue)}`,
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.CALCULATE_TAN_INVERSE:
-      let tanInverseValue: number
-      try {
-        tanInverseValue = parseFloat(state.currentOperand)
-
-        if (state.degOrRad === "deg") {
-          return {
-            ...state,
-            currentOperand: `${convertRadiansToDegree(
-              Math.atan(tanInverseValue)
-            )}`,
-          }
-        }
-
-        return {
-          ...state,
-          currentOperand: `${Math.atan(tanInverseValue)}`,
-        }
-      } catch (error) {
-        return state
-      }
-
-    case ActionType.SET_DEGREE_AND_RADIANS:
-      if (action.payload.value === "deg") {
-        return { ...state, degOrRad: "deg" }
-      } else if (action.payload.value === "rad") {
-        return { ...state, degOrRad: "rad" }
-      }
-
-    case ActionType.ADD_MEMORY:
-      return { ...state, memory: state.currentOperand }
-
-    case ActionType.SUBTRACT_MEMORY:
-      if (state.currentOperand === "") {
-        return state
-      }
-
-      if (state.memory === "") {
-        return {
-          ...state,
-          memory: `${math.multiply(-1, parseFloat(state.currentOperand))}`,
-        }
-      }
-
-      return {
-        ...state,
-        memory: `${math.subtract(
-          parseFloat(state.memory),
-          parseFloat(state.currentOperand)
-        )}`,
-      }
-
-    case ActionType.RECALL_MEMORY:
-      return { ...state, previousOperand: state.memory }
-
-    case ActionType.CLEAR_MEMORY:
-      return { ...state, memory: "" }
-
-    case ActionType.CLEAR:
+    case CalculatorActionType.CLEAR_ALL:
       return INITIAL_STATE
 
-    case ActionType.BACKSPACE:
+    case CalculatorActionType.CLEAR:
+      return {
+        ...state,
+        currentOperand: "0",
+        previousOperand: "",
+        operation: null,
+        operationExpression: "",
+      }
+
+    case CalculatorActionType.BACKSPACE:
       if (state.currentOperand === "") return state
       return {
         ...state,
         currentOperand: state.currentOperand.slice(0, -1),
       }
 
-    case ActionType.EVALUATE:
-      if (
-        state.operation == null ||
-        state.currentOperand === "" ||
-        state.previousOperand === ""
-      ) {
+    case CalculatorActionType.EVALUATE:
+      if (state.operation == null || state.currentOperand === "" || state.previousOperand === "") {
         return state
       }
+
       return {
         ...state,
         previousOperand: "",
         operation: null,
+        operationExpression: "",
         currentOperand: evaluate(state),
+      }
+
+    case AddConstantsType.ADD_PI:
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `${Math.PI}`, operationExpression: "π" }
+      }
+
+      // If previousOperand is not empty
+      // Multply with previousOperand if operation is not provided else follow provided operation
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(
+            `${state.previousOperand} ${state.operation === null ? "*" : state.operation} ${
+              Math.PI
+            }`
+          )}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } π`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${Math.E}`,
+        operationExpression: `π`,
+      }
+
+    case AddConstantsType.ADD_EULERS_NUMBER:
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `${Math.E}`, operationExpression: "e" }
+      }
+
+      // If previousOperand is not empty
+      // Multply with previousOperand if operation is not provided else follow provided operation
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(
+            `${state.previousOperand} ${state.operation === null ? "*" : state.operation} ${Math.E}`
+          )}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } e`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${Math.E}`,
+        operationExpression: `e`,
+      }
+
+    case DigitActionType.ADD_DIGIT:
+      if (action.payload.digit === "0" && state.currentOperand === "0") return state
+
+      // If currentOperand is zero and payload digit is not preiod replace 0 with provided payload digit.
+      // If payload is period then keep zero in currentOperand
+      if (
+        action.payload.digit !== "0" &&
+        action.payload.digit !== "." &&
+        state.currentOperand === "0"
+      )
+        return { ...state, currentOperand: `${action.payload.digit}` }
+
+      // If only preiod is present in currentOperand don't add another.
+      if (action.payload.digit === "." && state.currentOperand.includes(".")) return state
+
+      return {
+        ...state,
+        currentOperand: `${state.currentOperand}${action.payload.digit}`,
+      }
+
+    case ExponentialActionType.CALCULATE_EULERS_POWER:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `1`, operationExpression: `e <sup>${0}</sup>` }
+      }
+
+      // If previousOperand is not empty
+      // Multply with previousOperand if operation is not provided else follow provided operation
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${Math.E}^${state.currentOperand})`)}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } e <sup>${state.currentOperand}</sup>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${Math.E}^${state.currentOperand}`)}` || "",
+        operationExpression: `e <sup>${state.currentOperand}</sup>`,
+      }
+
+    case ExponentialActionType.CALCULATE_POWER_TEN:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `0 <sup>10</sup>` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${state.currentOperand}^10)`)}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } ${state.currentOperand} <sup>10</sup>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${state.currentOperand}^10`)}` || "",
+        operationExpression: `${state.currentOperand} <sup>10</sup>`,
+      }
+
+    case ExponentialActionType.CALCULATE_SQUARE:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `0 <sup>2</sup>` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${state.currentOperand}^2)`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } ${state.currentOperand} <sup>2</sup>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${state.currentOperand}^2`)}` || "",
+        operationExpression: `${state.currentOperand} <sup>2</sup>`,
+      }
+
+    case ExponentialActionType.CALCULATE_CUBE:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `0 <sup>3</sup>` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${state.currentOperand}^3)`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } ${state.currentOperand} <sup>3</sup>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${state.currentOperand}^3`)}` || "",
+        operationExpression: `${state.currentOperand} <sup>3</sup>`,
+      }
+
+    case ExponentialActionType.CALCULATE_SQUARE_ROOT:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `√ <sub>0</sub>` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${state.currentOperand}^(1/2))`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } √ <sub>${state.currentOperand}</sub>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${state.currentOperand}^(1/2)`)}` || "",
+        operationExpression: `√ <sub>${state.currentOperand}</sub>`,
+      }
+
+    case ExponentialActionType.CALCULATE_CUBE_ROOT:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `∛ <sub>0</sub>` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(${state.currentOperand}^(1/3))`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } ∛ <sub>${state.currentOperand}</sub>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`${state.currentOperand}^(1/3)`)}` || "",
+        operationExpression: `∛ <sub>${state.currentOperand}</sub>`,
+      }
+
+    case LogActionType.CALCULATE_NATURAL_LOG:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `Infinity`, operationExpression: `ln(0)` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`log(${state.currentOperand})`)}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } ln(${state.currentOperand})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`log(${state.currentOperand})`)}` || "",
+        operationExpression: `ln(${state.currentOperand})`,
+      }
+
+    case LogActionType.CALCULATE_COMMON_LOG:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `Infinity`, operationExpression: `log(0)` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`log(${state.currentOperand}, 10)`)}`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } log(${state.currentOperand})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`log(${state.currentOperand}, 10)`)}` || "",
+        operationExpression: `log(${state.currentOperand})`,
+      }
+
+    case MemoryActionType.ADD_MEMORY:
+      if (!isOperationExpressionValid(state)) return state
+      if (state.currentOperand === "") return state
+
+      if (state.memory !== "") {
+        return { ...state, memory: `${math.evaluate(`${state.memory} + ${state.currentOperand}`)}` }
+      }
+
+      return { ...state, memory: `${state.currentOperand}` }
+
+    case MemoryActionType.SUBTRACT_MEMORY:
+      if (!isOperationExpressionValid(state)) return state
+      if (state.currentOperand === "") return state
+
+      if (state.memory !== "") {
+        return { ...state, memory: `${math.evaluate(`${state.memory} - ${state.currentOperand}`)}` }
+      }
+
+      return state
+
+    case MemoryActionType.RECALL_MEMORY:
+      return {
+        ...state,
+        previousOperand: state.memory,
+        operation: null,
+        operationExpression: "",
+        memory: "",
+      }
+
+    case MemoryActionType.CLEAR_MEMORY:
+      return { ...state, previousOperand: "", operation: null, operationExpression: "", memory: "" }
+
+    case OperationActionType.CHOOSE_OPERATION:
+      if (state.currentOperand === "" && state.previousOperand === "") return state
+      if (!isOperationExpressionValid(state)) {
+        return { ...state, currentOperand: `${state.currentOperand} ${action.payload.operation}` }
+      }
+
+      if (state.currentOperand === "") {
+        if (action.payload.operation === "/") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationExpression: "÷",
+          }
+        }
+        if (action.payload.operation === "*") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationExpression: "×",
+          }
+        }
+
+        return {
+          ...state,
+          operation: action.payload.operation,
+          operationExpression: action.payload.operation,
+        }
+      }
+      if (state.previousOperand === "") {
+        if (action.payload.operation === "/") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationExpression: "÷",
+            previousOperand: state.currentOperand,
+            currentOperand: "0",
+          }
+        }
+        if (action.payload.operation === "*") {
+          return {
+            ...state,
+            operation: action.payload.operation,
+            operationExpression: "×",
+            previousOperand: state.currentOperand,
+            currentOperand: "0",
+          }
+        }
+        return {
+          ...state,
+          operation: action.payload.operation,
+          operationExpression: action.payload.operation,
+          previousOperand: state.currentOperand,
+          currentOperand: "0",
+        }
+      }
+
+      if (action.payload.operation === "/") {
+        return {
+          ...state,
+          previousOperand: evaluate(state),
+          operation: action.payload.operation,
+          operationExpression: "÷",
+          currentOperand: "0",
+        }
+      } else if (action.payload.operation === "*") {
+        return {
+          ...state,
+          previousOperand: evaluate(state),
+          operation: action.payload.operation,
+          operationExpression: "×",
+          currentOperand: "0",
+        }
+      }
+
+      return {
+        ...state,
+        previousOperand: evaluate(state),
+        operation: action.payload.operation,
+        operationExpression: action.payload.operation,
+        currentOperand: "0",
+      }
+
+    case OperationActionType.CALCULATE_INVERSE:
+      if (!isOperationExpressionValid(state)) return state
+      if (state.currentOperand.includes("(") || state.currentOperand.includes(")")) return state
+      if (
+        state.currentOperand === "" ||
+        state.currentOperand === "0" ||
+        state.currentOperand === "."
+      )
+        return state
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`(1/${state.currentOperand})`)}`,
+          operationExpression: ` ${state.operationExpression || "×"}  <sup>1</sup>&frasl;<sub>${
+            state.currentOperand
+          }</sub>`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`1/${state.currentOperand}`)}`,
+        operationExpression: `<sup>1</sup>&frasl;<sub>${state.currentOperand}</sub>`,
+      }
+
+    case OperationActionType.CALCULATE_FACTORIAL:
+      if (!isOperationExpressionValid(state)) return state
+      if (state.currentOperand.includes("(") || state.currentOperand.includes(")")) return state
+      if (state.currentOperand === "" || state.currentOperand === ".") return state
+      return { ...state, currentOperand: `${math.factorial(parseFloat(state.currentOperand))}` }
+
+    case OperationActionType.PLUS_MINUS:
+      if (!isOperationExpressionValid(state)) return state
+      if (state.currentOperand.includes("(") || state.currentOperand.includes(")")) return state
+      if (
+        state.currentOperand === "" ||
+        state.currentOperand === "0" ||
+        state.currentOperand === "."
+      )
+        return state
+      return { ...state, currentOperand: (parseFloat(state.currentOperand) * -1).toString() }
+
+    case ParenthesesActionType.ADD_PARENTHESES_OPEN:
+      const OPEN_PARENTHESES = "("
+
+      if (state.currentOperand === "0") return { ...state, currentOperand: `${OPEN_PARENTHESES}` }
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      )
+        return { ...state, currentOperand: `${OPEN_PARENTHESES}` }
+
+      if (
+        state.currentOperand !== "" &&
+        state.currentOperand !== "0" &&
+        !state.currentOperand.includes("(")
+      )
+        return {
+          ...state,
+          previousOperand: `${state.currentOperand}`,
+          operation: "*",
+          operationExpression: "×",
+          currentOperand: `${OPEN_PARENTHESES}`,
+        }
+
+      return {
+        ...state,
+        currentOperand: `${state.currentOperand} ${OPEN_PARENTHESES}`,
+      }
+
+    case ParenthesesActionType.ADD_PARENTHESES_CLOSE:
+      const CLOSE_PARENTHESES = ")"
+
+      if (!state.currentOperand.includes("(")) return state
+      if (
+        (state.currentOperand.match(/\)/gi) || []).length >=
+        (state.currentOperand.match(/\(/gi) || []).length
+      )
+        return state
+      if (state.currentOperand === "" || state.currentOperand === "0")
+        return { ...state, currentOperand: `${CLOSE_PARENTHESES}` }
+
+      return {
+        ...state,
+        currentOperand: `${state.currentOperand}${CLOSE_PARENTHESES}`,
+      }
+
+    case TrignometricActionType.TOOGLE_DEGREE_AND_RADIANS:
+      if (action.payload.degOrRad === "deg") {
+        return { ...state, degOrRad: "deg" }
+      } else if (action.payload.degOrRad === "rad") {
+        return { ...state, degOrRad: "rad" }
+      }
+
+    case TrignometricActionType.CALCULATE_SIN:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `sin(0 ${state.degOrRad})` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand:
+            `${math.evaluate(`sin(${state.currentOperand} ${state.degOrRad})`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } sin(${state.currentOperand} ${state.degOrRad})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`sin(${state.currentOperand} ${state.degOrRad})`)}` || "",
+        operationExpression: `sin(${state.currentOperand} ${state.degOrRad})`,
+      }
+
+    case TrignometricActionType.CALCULATE_COS:
+      const cosTolerance = 1e-10
+      let cosCurrentOperand: number | BigNumber = 0
+      let cosCalculatedValue: number | BigNumber = 0
+
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `1`, operationExpression: `cos(0 ${state.degOrRad})` }
+      }
+
+      // try catch block needed to be placed under above if else statements
+      try {
+        cosCurrentOperand = parseFloat(state.currentOperand)
+        cosCalculatedValue = math.cos(math.unit(cosCurrentOperand, state.degOrRad))
+      } catch (error) {
+        return { ...state, currentOperand: "Infinity" }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${
+            math.abs(cosCalculatedValue) < cosTolerance ? "0" : cosCalculatedValue
+          }`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } cos(${state.currentOperand} ${state.degOrRad})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.abs(cosCalculatedValue) < cosTolerance ? "0" : cosCalculatedValue}`,
+        operationExpression: `cos(${state.currentOperand} ${state.degOrRad})`,
+      }
+
+    case TrignometricActionType.CALCULATE_TAN:
+      const tanTolerance = 1e-10
+      let tanCurrentOperand: number | BigNumber = 0
+      let tanCalculatedValue: number | BigNumber = 0
+
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `tan(0 ${state.degOrRad})` }
+      }
+
+      if (state.currentOperand === "90" && state.degOrRad === "deg") {
+        return { ...state, currentOperand: "Infinity" }
+      }
+
+      // try catch block needed to be placed under above if else statements
+      try {
+        tanCurrentOperand = parseFloat(state.currentOperand) || bignumber(state.currentOperand)
+        tanCalculatedValue = math.tan(math.unit(tanCurrentOperand, state.degOrRad))
+      } catch (error) {
+        return { ...state, currentOperand: "Infinity" }
+      }
+
+      if (tanCurrentOperand === math.pi / 2 && state.degOrRad === "rad") {
+        return { ...state, currentOperand: "Infinity" }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${
+            math.abs(tanCalculatedValue) < tanTolerance ? "0" : tanCalculatedValue
+          }`,
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } tan(${state.currentOperand} ${state.degOrRad})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.abs(tanCalculatedValue) < tanTolerance ? "0" : tanCalculatedValue}`,
+        operationExpression: `tan(${state.currentOperand} ${state.degOrRad})`,
+      }
+
+    case TrignometricActionType.CALCULATE_SIN_INVERSE:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `asin(0)` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`asin(${state.currentOperand})`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } asin(${state.currentOperand})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`asin(${state.currentOperand})`)}` || "",
+        operationExpression: `asin(${state.currentOperand})`,
+      }
+
+    case TrignometricActionType.CALCULATE_COS_INVERSE:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `acos(0)` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`acos(${state.currentOperand})`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } acos(${state.currentOperand})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`acos(${state.currentOperand})`)}` || "",
+        operationExpression: `acos(${state.currentOperand})`,
+      }
+
+    case TrignometricActionType.CALCULATE_TAN_INVERSE:
+      if (!isOperationExpressionValid(state)) return state
+      if (
+        (state.currentOperand === "" || state.currentOperand === "0") &&
+        state.previousOperand === ""
+      ) {
+        return { ...state, currentOperand: `0`, operationExpression: `atan(0)` }
+      }
+
+      if (state.previousOperand !== "") {
+        return {
+          ...state,
+          currentOperand: `${math.evaluate(`atan(${state.currentOperand})`)}` || "",
+          operationExpression: ` ${
+            state.operationExpression === "" ? "×" : state.operationExpression
+          } atan(${state.currentOperand})`,
+        }
+      }
+
+      return {
+        ...state,
+        currentOperand: `${math.evaluate(`atan(${state.currentOperand})`)}` || "",
+        operationExpression: `atan(${state.currentOperand})`,
       }
 
     default:
       return state
-  }
-}
-
-// Use mathjs to evaluate the expression
-function evaluate({
-  currentOperand,
-  previousOperand,
-  operation,
-}: StateType): string {
-  const expression = `${previousOperand} ${operation} ${currentOperand}`
-  try {
-    return math.evaluate(expression).toString()
-  } catch (error) {
-    console.error(error)
-    return ""
   }
 }

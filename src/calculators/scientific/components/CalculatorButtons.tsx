@@ -1,6 +1,9 @@
 "use client"
 import { Dispatch } from "react"
-import { Action, ActionType } from "@/calculators/scientific/reducer/ScientificCalculatorReducer"
+import {
+  Action,
+  CalculatorActionType,
+} from "@/calculators/scientific/reducer/ScientificCalculatorReducerType"
 import { spaceGrotesk } from "@/lib/fonts"
 
 export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
@@ -9,7 +12,7 @@ export function ACButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-7 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CLEAR })}
+        onClick={() => dispatch({ type: CalculatorActionType.CLEAR_ALL })}
       >
         <span className="sr-only">Clear</span>
         <span
@@ -28,7 +31,7 @@ export function BackSpaceButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.BACKSPACE })}
+        onClick={() => dispatch({ type: CalculatorActionType.BACKSPACE })}
       >
         <span className="sr-only">Backspace</span>
         <svg
@@ -50,7 +53,7 @@ export function EqualButton({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-oceanBlue hover:bg-cosmicCobalt transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.EVALUATE })}
+        onClick={() => dispatch({ type: CalculatorActionType.EVALUATE })}
       >
         <span className="sr-only">Equal</span>
         <span className={`${spaceGrotesk.className} text-xl md:text-2xl lg:text-4xl text-gray-50`}>
@@ -60,5 +63,3 @@ export function EqualButton({ dispatch }: { dispatch: Dispatch<Action> }) {
     </>
   )
 }
-
-

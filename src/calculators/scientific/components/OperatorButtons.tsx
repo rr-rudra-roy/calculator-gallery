@@ -1,5 +1,8 @@
 import { Dispatch } from "react"
-import { Action, ActionType } from "@/calculators/scientific/reducer/ScientificCalculatorReducer"
+import {
+  Action,
+  OperationActionType,
+} from "@/calculators/scientific/reducer/ScientificCalculatorReducerType"
 import { spaceGrotesk } from "@/lib/fonts"
 
 export function AdditionOperationButton({ dispatch }: { dispatch: Dispatch<Action> }) {
@@ -8,12 +11,9 @@ export function AdditionOperationButton({ dispatch }: { dispatch: Dispatch<Actio
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => {
-          dispatch({
-            type: ActionType.CHOOSE_OPERATION,
-            payload: { operation: "+" },
-          })
-        }}
+        onClick={() =>
+          dispatch({ type: OperationActionType.CHOOSE_OPERATION, payload: { operation: "+" } })
+        }
       >
         <span className="sr-only">Addition</span>
         <span
@@ -32,12 +32,9 @@ export function SubtractionOperationButton({ dispatch }: { dispatch: Dispatch<Ac
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => {
-          dispatch({
-            type: ActionType.CHOOSE_OPERATION,
-            payload: { operation: "-" },
-          })
-        }}
+        onClick={() =>
+          dispatch({ type: OperationActionType.CHOOSE_OPERATION, payload: { operation: "-" } })
+        }
       >
         <span className="sr-only">Subtraction</span>
         <span
@@ -56,12 +53,9 @@ export function MultiplicationOperationButton({ dispatch }: { dispatch: Dispatch
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => {
-          dispatch({
-            type: ActionType.CHOOSE_OPERATION,
-            payload: { operation: "*" },
-          })
-        }}
+        onClick={() =>
+          dispatch({ type: OperationActionType.CHOOSE_OPERATION, payload: { operation: "*" } })
+        }
       >
         <span className="sr-only">Multiplication</span>
         <svg
@@ -88,12 +82,9 @@ export function DivisonOperationButton({
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => {
-          dispatch({
-            type: ActionType.CHOOSE_OPERATION,
-            payload: { operation: "/" },
-          })
-        }}
+        onClick={() =>
+          dispatch({ type: OperationActionType.CHOOSE_OPERATION, payload: { operation: "/" } })
+        }
       >
         <span className="sr-only">Divison</span>
         <svg
@@ -117,12 +108,9 @@ export function ModulusOperationButton({ dispatch }: { dispatch: Dispatch<Action
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => {
-          dispatch({
-            type: ActionType.CHOOSE_OPERATION,
-            payload: { operation: "%" },
-          })
-        }}
+        onClick={() =>
+          dispatch({ type: OperationActionType.CHOOSE_OPERATION, payload: { operation: "%" } })
+        }
       >
         <span className="sr-only">Modulus</span>
         <span
@@ -147,7 +135,7 @@ export function PlusMinusButton({
       <button
         type="button"
         className="py-4 lg:py-6 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.PLUS_MINUS })}
+        onClick={() => dispatch({ type: OperationActionType.PLUS_MINUS })}
       >
         <span className="sr-only">Plus Minus</span>
         <svg
@@ -162,13 +150,13 @@ export function PlusMinusButton({
   )
 }
 
-export function OneDividedByX({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function InverseOperation({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_INVERSE })}
+        onClick={() => dispatch({ type: OperationActionType.CALCULATE_INVERSE })}
       >
         <span className="sr-only">Inverse</span>
         <span
@@ -181,13 +169,13 @@ export function OneDividedByX({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function XFactorial({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function Factorial({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_FACTORIAL })}
+        onClick={() => dispatch({ type: OperationActionType.CALCULATE_FACTORIAL })}
       >
         <span className="sr-only">Factorial</span>
         <span

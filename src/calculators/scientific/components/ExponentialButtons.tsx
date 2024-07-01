@@ -1,16 +1,21 @@
 import { Dispatch } from "react"
-import { Action, ActionType } from "@/calculators/scientific/reducer/ScientificCalculatorReducer"
+import {
+  Action,
+  ExponentialActionType,
+} from "@/calculators/scientific/reducer/ScientificCalculatorReducerType"
 import { spaceGrotesk } from "@/lib/fonts"
 
-export function XToThePowerTen({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function PowerTen({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_POWER_TEN })}
+        onClick={() => {
+          dispatch({ type: ExponentialActionType.CALCULATE_POWER_TEN })
+        }}
       >
-        <span className="sr-only">Tan Inverse</span>
+        <span className="sr-only">Power Ten</span>
         <span
           className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
         >
@@ -22,15 +27,15 @@ export function XToThePowerTen({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function XToThePowerTwo({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function Square({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_SQUARE })}
+        onClick={() => dispatch({ type: ExponentialActionType.CALCULATE_SQUARE })}
       >
-        <span className="sr-only">Tan Inverse</span>
+        <span className="sr-only">Square</span>
         <span
           className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
         >
@@ -42,15 +47,15 @@ export function XToThePowerTwo({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function XToThePowerThree({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function Cube({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_CUBE })}
+        onClick={() => dispatch({ type: ExponentialActionType.CALCULATE_CUBE })}
       >
-        <span className="sr-only">Tan Inverse</span>
+        <span className="sr-only">Cube</span>
         <span
           className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
         >
@@ -62,13 +67,17 @@ export function XToThePowerThree({ dispatch }: { dispatch: Dispatch<Action> }) {
   )
 }
 
-export function EToThePowerX({ dispatch }: { dispatch: Dispatch<Action> }) {
+export function EulersPowerX({ dispatch }: { dispatch: Dispatch<Action> }) {
   return (
     <>
       <button
         type="button"
         className="py-4 lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_EULERS_POWER })}
+        onClick={() =>
+          dispatch({
+            type: ExponentialActionType.CALCULATE_EULERS_POWER,
+          })
+        }
       >
         <span
           className={`${spaceGrotesk.className} text-base md:text-lg lg:text-xl text-gray-900 dark:text-gray-100`}
@@ -87,7 +96,7 @@ export function SquareRoot({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-4 flex justify-center items-center lg:py-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_SQUARE_ROOT })}
+        onClick={() => dispatch({ type: ExponentialActionType.CALCULATE_SQUARE_ROOT })}
       >
         <span className="sr-only">Square root</span>
         <svg
@@ -108,7 +117,7 @@ export function CubeRoot({ dispatch }: { dispatch: Dispatch<Action> }) {
       <button
         type="button"
         className="py-2 lg:py-4 flex justify-center items-center bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
-        onClick={() => dispatch({ type: ActionType.CALCULATE_CUBE_ROOT })}
+        onClick={() => dispatch({ type: ExponentialActionType.CALCULATE_CUBE_ROOT })}
       >
         <span className="sr-only">cube root</span>
         <svg
